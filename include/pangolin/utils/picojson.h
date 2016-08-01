@@ -39,7 +39,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <inttypes.h>
 #include <iostream>
 #include <iterator>
 #include <limits>
@@ -72,6 +71,7 @@ extern "C" {
 #ifdef PICOJSON_USE_INT64
 # define __STDC_FORMAT_MACROS
 # include <errno.h>
+# include <inttypes.h>
 #endif // PICOJSON_USE_INT64
 
 // to disable the use of localeconv(3), set PICOJSON_USE_LOCALE to 0
@@ -902,7 +902,7 @@ template <typename Context, typename Iter> inline bool _parse(Context& ctx, inpu
 #ifdef PICOJSON_USE_INT64
             {
                 errno = 0;
-                intmax_t ival = strtoimax(num_str.c_str(), &endp, 10);
+                int64_t ival = strtoll(num_str.c_str(), &endp, 10);
                 if (errno == 0
                         && std::numeric_limits<int64_t>::min() <= ival
                         && ival <= std::numeric_limits<int64_t>::max()
