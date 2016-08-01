@@ -902,7 +902,7 @@ template <typename Context, typename Iter> inline bool _parse(Context& ctx, inpu
 #ifdef PICOJSON_USE_INT64
             {
                 errno = 0;
-                intmax_t ival = strtoimax(num_str.c_str(), &endp, 10);
+                int64_t ival = strtoll(num_str.c_str(), &endp, 10);
                 if (errno == 0
                         && std::numeric_limits<int64_t>::min() <= ival
                         && ival <= std::numeric_limits<int64_t>::max()
