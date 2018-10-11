@@ -17,8 +17,9 @@ SET(CPACK_PACKAGE_VERSION_MINOR ${PANGOLIN_VERSION_MINOR})
 SET(CPACK_PACKAGE_VERSION_PATCH "0")
 include(CPack)
 
-option( BUILD_EXAMPLES "Build Examples" ON )
-option( BUILD_TESTS "Build Tests" ON )
+option( BUILD_EXAMPLES "Build Examples" OFF )
+option( BUILD_TESTS "Build Tests" OFF )
+option( BUILD_SHARED_LIBS    "Build Shared Library" OFF)
 
 if(_WIN_)
     option( BUILD_SHARED_LIBS    "Build Shared Library" OFF)
@@ -44,7 +45,7 @@ if(_WIN_)
         endforeach()
     endif()
 else()
-    option( BUILD_SHARED_LIBS "Build Shared Library" ON)
+    option( BUILD_SHARED_LIBS "Build Shared Library" OFF)
 endif()
 
 if(NOT MSVC)
@@ -78,15 +79,10 @@ endif()
 string(TOLOWER ${PROJECT_NAME} LIBRARY_NAME)
 
 # make an uninstall target
-configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-    IMMEDIATE @ONLY
-)
-
 add_custom_target(pangolin_uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
+add_subdirectory("../glew" glew)
 add_subdirectory("external")
 add_subdirectory("src")
 
