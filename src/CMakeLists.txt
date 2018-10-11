@@ -156,14 +156,8 @@ if(BUILD_PANGOLIN_GUI)
         list(APPEND USER_INC  "${OPENGL_INCLUDE_DIR}" )
         list(APPEND LINK_LIBS "${OPENGL_LIBRARIES}" )
 
-        if(NOT GLEW_FOUND)
-            find_package(GLEW REQUIRED QUIET)
-        endif()
-        if(GLEW_FOUND)
-            list(APPEND USER_INC  "${GLEW_INCLUDE_DIR}" )
-            list(APPEND LINK_LIBS "${GLEW_LIBRARY}" )
-            set(HAVE_GLEW 1)
-        endif()
+        list(APPEND LINK_LIBS libglew_static libglew_shared)
+        set(HAVE_GLEW 1)
     endif()
 
     if( HAVE_GLES_2 )
@@ -560,7 +554,7 @@ include_directories( ${LIB_INC_DIR} )
 include_directories( ${USER_INC} )
 include_directories( ${INTERNAL_INC} )
 
-add_library(${LIBRARY_NAME} ${SOURCES} ${HEADERS})
+add_library(${LIBRARY_NAME} STATIC ${SOURCES} ${HEADERS})
 target_link_libraries(${LIBRARY_NAME} ${LINK_LIBS})
 
 ## Generate symbol export helper header on MSVC
