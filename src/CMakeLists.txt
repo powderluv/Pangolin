@@ -156,14 +156,8 @@ if(BUILD_PANGOLIN_GUI)
         list(APPEND USER_INC  "${OPENGL_INCLUDE_DIR}" )
         list(APPEND LINK_LIBS "${OPENGL_LIBRARIES}" )
 
-        if(NOT BUILD_EXTERN_GLEW)
-            find_package(GLEW REQUIRED QUIET)
-        endif()
-        if(GLEW_FOUND)
-            list(APPEND USER_INC  "${GLEW_INCLUDE_DIR}" )
-            list(APPEND LINK_LIBS "${GLEW_LIBRARY}" )
-            set(HAVE_GLEW 1)
-        endif()
+        list(APPEND LINK_LIBS libglew_static libglew_shared)
+        set(HAVE_GLEW 1)
     endif()
 
     if( HAVE_GLES_2 )
@@ -567,7 +561,7 @@ endif()
 
 set(INSTALL_INCLUDE_DIR "include")
 
-add_library(${LIBRARY_NAME} ${SOURCES} ${HEADERS})
+add_library(${LIBRARY_NAME} STATIC ${SOURCES} ${HEADERS})
 # 'System' includes shield us from warnings in those includes.
 target_include_directories(${LIBRARY_NAME} SYSTEM PUBLIC ${USER_INC} PRIVATE ${INTERNAL_INC})
 target_include_directories(${LIBRARY_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
