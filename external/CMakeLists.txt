@@ -58,6 +58,7 @@ ExternalProject_Add( __zlib
              -DCMAKE_C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG}
              -DCMAKE_C_FLAGS_MINSIZEREL=${CMAKE_C_FLAGS_MINSIZEREL}
              -DCMAKE_C_FLAGS_RELWITHDEBINFO=${CMAKE_C_FLAGS_RELWITHDEBINFO}
+  BUILD_BYPRODUCTS ${CMAKE_INSTALL_PREFIX}/lib/zlibstatic.lib
 )
 add_library(_zlib STATIC IMPORTED GLOBAL)
 add_dependencies(_zlib __zlib)
@@ -84,6 +85,8 @@ ExternalProject_Add( __libpng
               -DCMAKE_C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG}
               -DCMAKE_C_FLAGS_MINSIZEREL=${CMAKE_C_FLAGS_MINSIZEREL}
               -DCMAKE_C_FLAGS_RELWITHDEBINFO=${CMAKE_C_FLAGS_RELWITHDEBINFO}
+  BUILD_BYPRODUCTS ${CMAKE_INSTALL_PREFIX}/lib/libpng16.lib
+               ${CMAKE_INSTALL_PREFIX}/lib/libpng16_static.lib
   DEPENDS __zlib
 )
 
@@ -132,6 +135,7 @@ ExternalProject_Add( __libjpeg
               -DCMAKE_C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG}
               -DCMAKE_C_FLAGS_MINSIZEREL=${CMAKE_C_FLAGS_MINSIZEREL}
               -DCMAKE_C_FLAGS_RELWITHDEBINFO=${CMAKE_C_FLAGS_RELWITHDEBINFO}
+  BUILD_BYPRODUCTS ${CMAKE_INSTALL_PREFIX}/lib/jpeg.lib
 )
 
 add_library(_libjpeg STATIC IMPORTED GLOBAL)

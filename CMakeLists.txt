@@ -31,8 +31,8 @@ option( BUILD_SHARED_LIBS    "Build Shared Library" OFF)
 if(_WIN_)
     option( BUILD_SHARED_LIBS    "Build Shared Library" OFF)
     option( BUILD_EXTERN_GLEW    "Automatically download, build and compile GLEW" ON)
-    option( BUILD_EXTERN_LIBPNG  "Automatically download, build and compile libpng" ON)
-    option( BUILD_EXTERN_LIBJPEG "Automatically download, build and compile libjpeg" ON)
+    option( BUILD_EXTERN_LIBPNG  "Automatically download, build and compile libpng" OFF)
+    option( BUILD_EXTERN_LIBJPEG "Automatically download, build and compile libjpeg" OFF)
     option( MSVC_USE_STATIC_CRT  "Use static C Runtime with MSVC, /MT instead of /MD" ON)
 
     # Make sure there are no erroneous C Runtime flags
